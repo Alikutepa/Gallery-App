@@ -26,3 +26,22 @@ def categoryPage(request, slug):
     context['category'] = category
 
     return render(request, 'main/category.html', context)
+
+def imageDetailPage(request, slug1, slug2):
+
+    category = Category.objects.get(slug=slug1)
+    image = Image.objects.get(slug=slug2)
+
+    context = {}
+    context['category'] = category
+    context['image'] = image
+
+    return render(request, 'main/category.html', context)
+
+def image_location(request, location):
+    images = Image.filter_by_location(location)
+    print(images)
+    return render(request, 'images/location.html', {'location_images': images})    
+
+
+
