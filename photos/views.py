@@ -41,7 +41,17 @@ def imageDetailPage(request, slug1, slug2):
 def image_location(request, location):
     images = Image.filter_by_location(location)
     print(images)
-    return render(request, 'images/location.html', {'location_images': images})    
+    return render(request, 'images/location.html', {'location_images': images})   
 
+def search_image(request):
+  
+    if 'category' in request.GET and request.GET["category"]:
+        search_term = request.GET.get("category")
+        searched_categories = Category.search_by_category(search_term)
+        message = f"{search_term}"
 
+        return render(request, 'main/search.html',{"message":message,"categories": searched_categories})
+    else:
+        message = 'No searches found yet'
+        return render (request, 'main/search.html',{"message":message})
 
