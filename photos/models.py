@@ -15,6 +15,11 @@ class Category(models.Model):
     uniqueId = models.CharField(null=True, blank=True, max_length=100)
     slug = models.SlugField(max_length=500, unique=True, blank=True, null=True)
     date_created = models.DateTimeField(blank=True, null=True)
+
+    @classmethod
+    def search_by_category(cls,search_term):
+        image = cls.objects.filter(title__icontains=search_term)
+        return image
     
 
     def __str__(self):
