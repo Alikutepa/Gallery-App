@@ -6,9 +6,12 @@ from .models import *
 
 def home(request):
     categories = Category.objects.all()
+
     context = {}
     context['categories'] = categories
-    return render(request, 'main/index.html', {})
+
+    return render(request, 'main/index.html', context)
+
 
 
 def categoryPage(request, slug):
@@ -16,7 +19,7 @@ def categoryPage(request, slug):
     category = Category.objects.get(slug=slug)
     images = Image.objects.filter(category=category).order_by('-date_created')[:6]
     for x in images:
-        x.shortDescription = x.description[:5]
+        x.shortDescription = x.description[:20]
 
     context = {}
     context['images'] = images
