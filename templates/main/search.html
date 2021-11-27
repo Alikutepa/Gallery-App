@@ -1,0 +1,57 @@
+{%extends 'main/base.html'%} 
+{% block content %}
+<div class="container">
+
+  <div class="row">
+    {% if categories%}
+      <h2>Found {{ categories|length }} of searched term {{message}}</h2>
+    {% else %}
+      <h2> Found 0 categories for the search term {{message}}</h2>
+    {% endif %}
+
+  </div>
+
+  <div class="row">
+
+  {% if categories %}
+    {% for category in categories %}
+    
+  
+
+    
+      <div class="album py-5 bg-light">
+        <div class="container">
+    
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {%for image in images%}
+            <div class="col">
+              <div class="card shadow-sm">
+                <img src="{{image.squareImage.url}}" alt="">
+  
+    
+                <div class="card-body">
+                  <p class="card-text">{{image.shortDescription}}</p>
+                  <p class="card-text">{{image.location}}</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                     <button type="button" class="btn btn-sm btn-outline-secondary" data-target="#">Image Details</button>
+                    </div>
+                    <small class="text-muted">{{image.date_created|date}}</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+          {%endfor%}
+  
+  
+          </div>
+        </div>
+      </div>
+    
+
+    {% endfor %}
+  {% endif %}
+  </div>
+</div>
+{% endblock %}

@@ -29,11 +29,11 @@ def categoryPage(request, slug):
 
 def imageDetailPage(request, slug1, slug2):
 
-    category = Category.objects.get(slug=slug1)
+    categories = Category.objects.get(slug=slug1)
     image = Image.objects.get(slug=slug2)
 
     context = {}
-    context['category'] = category
+    context['category'] = categories
     context['image'] = image
 
     return render(request, 'main/category.html', context)
@@ -44,14 +44,16 @@ def image_location(request, location):
     return render(request, 'images/location.html', {'location_images': images})   
 
 def search_image(request):
+ 
   
-    if 'category' in request.GET and request.GET["category"]:
+  
+  if 'category' in request.GET and request.GET["category"]:
         search_term = request.GET.get("category")
         searched_categories = Category.search_by_category(search_term)
         message = f"{search_term}"
 
         return render(request, 'main/search.html',{"message":message,"categories": searched_categories})
-    else:
+  else:
         message = 'No searches found yet'
         return render (request, 'main/search.html',{"message":message})
 
