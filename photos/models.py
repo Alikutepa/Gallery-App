@@ -4,6 +4,7 @@ from django_resized import ResizedImageField
 from django.utils import timezone
 from uuid import uuid4
 from django.urls import reverse
+from cloudinary.models import CloudinaryField
 
 
 
@@ -69,7 +70,7 @@ class Location(models.Model):
 class Image(models.Model):
     description = models.TextField(null=True, blank=True)
     ##ImageFields
-    squareImage = ResizedImageField(size=[1000, 1000], crop=['middle', 'center'], default='default_square.jpg', upload_to='square')
+    squareImage = CloudinaryField('image')
     ##Related Fiels
     category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.CASCADE)
     location = models.ForeignKey(Location, null=True, on_delete=models.CASCADE)
