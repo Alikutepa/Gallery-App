@@ -36,7 +36,7 @@ Admin should:
 | To filter by Location  | **Click drop-down on navbar** | Users can view images by Location|
 
 ## Application link
-click [here]()
+click [here](https://julzgallery.herokuapp.com/)
 
 
 ## SetUp / Installation Requirements
